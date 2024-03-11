@@ -12,7 +12,7 @@ function SearchBar({ onSearch }) {
     form.reset();
   }
   return (
-    <header className={css.form}>
+    <header>
       <form className={css.form} onSubmit={handleSubmit}>
         <input
           className={css.input}
