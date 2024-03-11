@@ -1,0 +1,23 @@
+.list {
+  display: flex;
+  /* justify-content: center; */
+  padding-left: 50px;
+  padding-right: 50px;
+  width: fit-content;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 100px;
+}
+
+.item {
+  width: calc((100% - 30px) / 3);
+  height: 267px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.item:hover,
+.item:focus {
+  transform: scale(1.03);
+  transition: transform 250ms ease-in-out;
+}
