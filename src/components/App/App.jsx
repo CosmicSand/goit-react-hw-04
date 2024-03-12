@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Grid } from "react-loader-spinner";
 import SearchBar from "../SearchBar/SearchBar";
+import Loader from "../Loader/Loader";
 import ImageGallery from "../ImageGallery/ImageGallery";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import fetchImages from "../../gallery-api";
-import css from "./App.module.css";
+import "./App.css";
 
 function App() {
   const appId = 577372;
@@ -12,13 +13,19 @@ function App() {
 
   const [searchingText, setSearchingText] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   async function handleSearch(searchingText) {
     try {
+      setError(null);
       setLoading(true);
       const resp = await fetchImages(searchingText);
+      if (resp.length === 0) {
+        throw new Error("Nothing found!");
+      }
       setSearchingText(resp);
     } catch (error) {
+      setError(error);
       console.log(error);
     } finally {
       setLoading(false);
@@ -28,22 +35,11 @@ function App() {
   return (
     <>
       <SearchBar onSearch={handleSearch} />
-      <ImageGallery value={searchingText} />
-      {loading && (
-        <Grid
-          visible={true}
-          height="80"
-          width="80"
-          color="#fff"
-          ariaLabel="grid-loading"
-          radius="12.5"
-          wrapperStyle={{
-            display: "block",
-            marginLeft: "auto",
-            marginRight: "auto",
-            textAlign: "center",
-          }}
-        />
+      {loading && <Loader />}
+      {error ? (
+        <ErrorMessage value={error} />
+      ) : (
+        <ImageGallery value={searchingText} />
       )}
     </>
   );
