@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Grid } from "react-loader-spinner";
 import SearchBar from "../SearchBar/SearchBar";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import fetchImages from "../../gallery-api";
@@ -10,16 +11,17 @@ function App() {
   const securityKey = "0Bi-McYmSz35ROYe7Vcwkh3cNuZnzS2E91IQZu5IUms";
 
   const [searchingText, setSearchingText] = useState([]);
-  console.log(searchingText);
+  const [loading, setLoading] = useState(false);
 
   async function handleSearch(searchingText) {
     try {
-      const resp = fetchImages(searchingText);
-      resp.then((respond) => {
-        setSearchingText(respond);
-      });
+      setLoading(true);
+      const resp = await fetchImages(searchingText);
+      setSearchingText(resp);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -27,6 +29,22 @@ function App() {
     <>
       <SearchBar onSearch={handleSearch} />
       <ImageGallery value={searchingText} />
+      {loading && (
+        <Grid
+          visible={true}
+          height="80"
+          width="80"
+          color="#fff"
+          ariaLabel="grid-loading"
+          radius="12.5"
+          wrapperStyle={{
+            display: "block",
+            marginLeft: "auto",
+            marginRight: "auto",
+            textAlign: "center",
+          }}
+        />
+      )}
     </>
   );
 }

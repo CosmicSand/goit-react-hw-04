@@ -112,3 +112,9 @@ address {
     background-color: #f9f9f9;
   }
 }
+.loader {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
