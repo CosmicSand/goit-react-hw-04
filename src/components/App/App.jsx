@@ -3,6 +3,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import Loader from "../Loader/Loader";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import ImageModal from "../ImageModal/ImageModal";
 import fetchImages from "../../gallery-api";
 import "./App.css";
 
@@ -11,9 +12,14 @@ function App() {
   const accessKey = "MgGVu-2Aj7GbcWHyEAULVPxtWi0-9yK_brGw5GgXLKI";
   const securityKey = "0Bi-McYmSz35ROYe7Vcwkh3cNuZnzS2E91IQZu5IUms";
 
-  const [searchingText, setSearchingText] = useState([]);
+  const [gallery, setGallery] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [modalImage, setModalImage] = useState(null);
+
+  function backDropSetting(modalImageObj) {
+    setModalImage(modalImageObj);
+  }
 
   async function handleSearch(searchingText) {
     try {
@@ -23,7 +29,8 @@ function App() {
       if (resp.length === 0) {
         throw new Error("Nothing found!");
       }
-      setSearchingText(resp);
+      setGallery(resp);
+      console.log(resp);
     } catch (error) {
       setError(error);
       console.log(error);
@@ -34,12 +41,13 @@ function App() {
 
   return (
     <>
+      {modalImage && <ImageModal value={modalImage} />}
       <SearchBar onSearch={handleSearch} />
       {loading && <Loader />}
       {error ? (
         <ErrorMessage value={error} />
       ) : (
-        <ImageGallery value={searchingText} />
+        <ImageGallery value={gallery} onView={backDropSetting} />
       )}
     </>
   );
