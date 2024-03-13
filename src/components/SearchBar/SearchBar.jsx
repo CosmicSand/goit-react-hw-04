@@ -5,9 +5,12 @@ function SearchBar({ onSearch }) {
   const inpId = useId();
 
   function handleSubmit(e) {
+    e.preventDefault();
     const form = e.target;
     const searchingText = form.elements.search.value;
-    e.preventDefault();
+    if (searchingText.trim().length === 0) {
+      return;
+    }
     onSearch(searchingText);
     form.reset();
   }

@@ -6,11 +6,12 @@ axios.defaults.baseURL = "https://api.unsplash.com/";
 axios.defaults.headers.common["Authorization"] = `Client-ID ${accessKey}`;
 axios.defaults.headers.common["Accept-Version"] = `v1`;
 
-async function fetchImages(searchingText) {
+async function fetchImages(searchingText, page = 1) {
   const response = await axios.get("/search/photos", {
     params: {
       query: searchingText,
-      per_page: 10,
+      per_page: 9,
+      page,
       order_by: "popular",
       orientation: "landscape",
     },
