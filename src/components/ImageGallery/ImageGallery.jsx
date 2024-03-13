@@ -21,7 +21,7 @@ function ImageGallery({ value, onView }) {
   return (
     <ul className={css.list} onClick={handleClick}>
       {value.map((imgage) => (
-        <li className={css.item} key={imgage.id}>
+        <li className={css.item} key={imgage.id} tabIndex={0}>
           <ImageCard value={imgage} />
         </li>
       ))}

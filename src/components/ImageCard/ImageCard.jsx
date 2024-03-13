@@ -10,7 +10,7 @@ function ImageCard({
 }) {
   return (
     <div className={css.card}>
-      <a href="#">
+      <a className={css.link} href="#" tabIndex={1}>
         <img
           className={css.img}
           src={small}
