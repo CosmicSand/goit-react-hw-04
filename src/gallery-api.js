@@ -16,7 +16,7 @@ async function fetchImages(searchingText, page = 1) {
       orientation: "landscape",
     },
   });
-  return response.data.results;
+  return response.data;
 }
 
 export default fetchImages;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import SearchBar from "../SearchBar/SearchBar";
 import Loader from "../Loader/Loader";
@@ -7,6 +7,7 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import ImageModal from "../ImageModal/ImageModal";
 import fetchImages from "../../gallery-api";
 import "./App.css";
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 
 function App() {
   const appId = 577372;
@@ -14,31 +15,43 @@ function App() {
   const securityKey = "0Bi-McYmSz35ROYe7Vcwkh3cNuZnzS2E91IQZu5IUms";
 
   const [gallery, setGallery] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isloading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [modalImage, setModalImage] = useState(null);
+  const [isLoadMore, setIsLoadMore] = useState(false);
+
+  // const totalPages = useRef(1);
 
   function backDropSetting(modalImageObj) {
     setModalImage(modalImageObj);
   }
 
-  async function handleSearch(searchingText) {
+  async function handleSearch(searchingText, page) {
     try {
       setError(null);
-      setLoading(true);
-      setGallery([]);
-      const resp = await fetchImages(searchingText);
-      if (resp.length === 0) {
+      setIsLoading(true);
+      if (page === 1) {
+        setGallery([]);
+      }
+
+      const resp = await fetchImages(searchingText, page);
+      if (resp.results.length === 0) {
         throw new Error("Nothing found!");
       }
-      setGallery(resp);
+      setGallery(resp.results);
+      if (resp.total > gallery.length) {
+        setIsLoadMore(true);
+      } else {
+        setIsLoadMore(false);
+      }
       console.log(resp);
     } catch (error) {
       setError(error);
+      setIsLoadMore(false);
       console.log(error);
       toast.error(`Oooops! ${error.message}!`);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   }
 
@@ -69,7 +82,8 @@ function App() {
           onBackDrop={backDropSetting}
         />
       )}
-      {loading && <Loader />}
+      {isloading && <Loader />}
+      {isLoadMore && <LoadMoreBtn />}
     </>
   );
 }
