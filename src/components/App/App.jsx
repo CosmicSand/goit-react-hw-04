@@ -41,13 +41,19 @@ function App() {
 
   return (
     <>
-      {modalImage && <ImageModal value={modalImage} />}
       <SearchBar onSearch={handleSearch} />
       {loading && <Loader />}
       {error ? (
         <ErrorMessage value={error} />
       ) : (
         <ImageGallery value={gallery} onView={backDropSetting} />
+      )}
+      {modalImage && (
+        <ImageModal
+          value={modalImage}
+          isOpen={true}
+          onBackDrop={backDropSetting}
+        />
       )}
     </>
   );

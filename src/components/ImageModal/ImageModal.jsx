@@ -1,12 +1,29 @@
 import Modal from "react-modal";
-import ReactModal from "react-modal";
 import css from "./ImageModal.module.css";
 
-function ImageModal({ value: { url, alt, name, location, portfolio } }) {
+function ImageModal({
+  value: { url, alt, name, location, portfolio },
+  onBackDrop,
+  isOpen,
+}) {
+  //   function handleEvent(e) {
+  //     console.log(e);
+  //     if (e.target.code === "Escape")
+
+  //     console.log(e.target.code);
+  //     onBackDrop(null);
+  //   }
+  //   function handleKey(e) {
+  //     console.log(e);
+
+  //     console.log(e.target.code);
+  //     onBackDrop(null);
+  //   }
+
   Modal.setAppElement("#root");
   return (
-    <ReactModal
-      isOpen={url && true}
+    <Modal
+      isOpen={isOpen}
       shouldCloseOnEsc={true}
       shouldCloseOnOverlayClick={true}
       style={{
@@ -37,9 +54,34 @@ function ImageModal({ value: { url, alt, name, location, portfolio } }) {
           </p>
         </div>
       )}
-    >
-      <p className="hhh">Cool</p>
-    </ReactModal>
+    ></Modal>
+
+    // =============== Альтернатива =================
+
+    // <div
+    //   id="modal"
+    //   className={css.modal}
+    //   onClick={handleEvent}
+    //   onKeyUp={handleKey}
+    //   tabIndex={1}
+    // >
+    //   <div className={css.container} onKeyUp={handleKey}>
+    //     <img src={url} alt={alt} onKeyUp={handleKey} />
+    //     <p className={css.text}>
+    //       {name}
+    //       {location ? ` from ${location}` : ` from lovely Earth planet`} --&gt;
+    //       More cool photos
+    //       <a
+    //         className={css.link}
+    //         href={portfolio}
+    //         target="_blank"
+    //         rel="noreferrer"
+    //       >
+    //         &nbsp;here
+    //       </a>
+    //     </p>
+    //   </div>
+    // </div>
   );
 }
 

@@ -1,3 +1,17 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background-color: rgba(45, 45, 45, 0.3);
+  backdrop-filter: blur(5px);
+}
+
 .container {
   width: 800px;
   /* z-index: 9999; */
@@ -12,6 +26,7 @@
   padding-bottom: 5px;
   padding-left: 10px;
   opacity: 0.9;
+  text-align: left;
 }
 .link {
   font-weight: 500;
