@@ -8,7 +8,6 @@ function ImageModal({
 }) {
   //   function handleEvent(e) {
   //     console.log(e);
-  //     if (e.target.code === "Escape")
 
   //     console.log(e.target.code);
   //     onBackDrop(null);
@@ -26,6 +25,7 @@ function ImageModal({
       isOpen={isOpen}
       shouldCloseOnEsc={true}
       shouldCloseOnOverlayClick={true}
+      onRequestClose={() => onBackDrop(null)}
       style={{
         overlay: {
           display: "flex",
@@ -37,7 +37,11 @@ function ImageModal({
         },
       }}
       contentElement={() => (
-        <div className={css.container}>
+        <div
+          className={css.container}
+          onClick={(e) => console.log(e)}
+          onKeyUp={(e) => console.log(e)}
+        >
           <img src={url} alt={alt} />
           <p className={css.text}>
             {name}

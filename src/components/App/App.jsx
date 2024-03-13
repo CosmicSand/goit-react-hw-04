@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import SearchBar from "../SearchBar/SearchBar";
 import Loader from "../Loader/Loader";
 import ImageGallery from "../ImageGallery/ImageGallery";
@@ -25,6 +26,7 @@ function App() {
     try {
       setError(null);
       setLoading(true);
+      setGallery([]);
       const resp = await fetchImages(searchingText);
       if (resp.length === 0) {
         throw new Error("Nothing found!");
@@ -34,6 +36,7 @@ function App() {
     } catch (error) {
       setError(error);
       console.log(error);
+      toast.error(`Oooops! ${error.message}!`);
     } finally {
       setLoading(false);
     }
@@ -42,7 +45,18 @@ function App() {
   return (
     <>
       <SearchBar onSearch={handleSearch} />
-      {loading && <Loader />}
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          className: "",
+          style: {
+            border: "1px solid #713200",
+            padding: "16px",
+            color: "#fff",
+            backgroundColor: "#454545",
+          },
+        }}
+      />
       {error ? (
         <ErrorMessage value={error} />
       ) : (
@@ -51,10 +65,11 @@ function App() {
       {modalImage && (
         <ImageModal
           value={modalImage}
-          isOpen={true}
+          isOpen={modalImage && true}
           onBackDrop={backDropSetting}
         />
       )}
+      {loading && <Loader />}
     </>
   );
 }
