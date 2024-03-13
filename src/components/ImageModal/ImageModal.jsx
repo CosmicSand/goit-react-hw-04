@@ -1,12 +1,14 @@
 import Modal from "react-modal";
+import ReactModal from "react-modal";
 import css from "./ImageModal.module.css";
 
 function ImageModal({ value: { url, alt, name, location, portfolio } }) {
   Modal.setAppElement("#root");
   return (
-    <Modal
+    <ReactModal
       isOpen={url && true}
       shouldCloseOnEsc={true}
+      shouldCloseOnOverlayClick={true}
       style={{
         overlay: {
           display: "flex",
@@ -37,7 +39,7 @@ function ImageModal({ value: { url, alt, name, location, portfolio } }) {
       )}
     >
       <p className="hhh">Cool</p>
-    </Modal>
+    </ReactModal>
   );
 }
 
