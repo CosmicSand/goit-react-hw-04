@@ -1,5 +1,6 @@
 import { useId } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
+import { FaExclamationCircle } from "react-icons/fa";
 import css from "./SearchBar.module.css";
 
 function SearchBar({ onSearch }) {
@@ -10,7 +11,9 @@ function SearchBar({ onSearch }) {
     const form = e.target;
     const searchingText = form.elements.search.value.toLowerCase();
     if (searchingText.trim().length === 0) {
-      toast.error("Oh, no! You didn't type any leter!)");
+      toast("Oh, no! You didn't type any letter!", {
+        icon: <FaExclamationCircle size="24" />,
+      });
       return;
     }
     onSearch(searchingText);
