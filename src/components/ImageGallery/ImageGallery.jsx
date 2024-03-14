@@ -34,7 +34,7 @@ function ImageGallery({ value, onView }) {
       {window.scrollY > 20 && (
         <div className={css.top}>
           <a className={css.arrow} href="#top">
-            <BiSolidChevronsUp />
+            <BiSolidChevronsUp className={css.icon} size="32" />
           </a>
         </div>
       )}
