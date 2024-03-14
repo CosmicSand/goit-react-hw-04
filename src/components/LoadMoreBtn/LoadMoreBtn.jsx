@@ -1,7 +1,9 @@
 import css from "./LoadMoreBtn.module.css";
 
-function LoadMoreBtn() {
-  function handleClick() {}
+function LoadMoreBtn({ onLoad }) {
+  function handleClick() {
+    onLoad();
+  }
 
   return (
     <button className={css.btn} type="button" onClick={handleClick}>

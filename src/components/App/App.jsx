@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import SearchBar from "../SearchBar/SearchBar";
 import Loader from "../Loader/Loader";
@@ -19,40 +19,52 @@ function App() {
   const [error, setError] = useState(null);
   const [modalImage, setModalImage] = useState(null);
   const [isLoadMore, setIsLoadMore] = useState(false);
+  const [page, setPage] = useState(1);
+  const [searchingText, setSearchingText] = useState("");
 
-  // const totalPages = useRef(1);
+  useEffect(() => {
+    async function galleryBuilding(searchingText, page) {
+      try {
+        if (searchingText.length === 0) return;
+        setError(null);
+        setIsLoading(true);
+        const resp = await fetchImages(searchingText, page);
+        if (resp.results.length === 0) {
+          throw new Error("Nothing found!");
+        }
+        if (page > 1) {
+          setGallery((prevGallery) => [...prevGallery, ...resp.results]);
+        } else {
+          setGallery(resp.results);
+        }
+        if (resp.total / 9 > page) {
+          setIsLoadMore(true);
+        } else {
+          setIsLoadMore(false);
+        }
+      } catch (error) {
+        setError(error);
+        setIsLoadMore(false);
+        console.log(error);
+        toast.error(`Oooops! ${error.message}!`);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    galleryBuilding(searchingText, page);
+  }, [searchingText, page]);
 
   function backDropSetting(modalImageObj) {
     setModalImage(modalImageObj);
   }
 
-  async function handleSearch(searchingText, page) {
-    try {
-      setError(null);
-      setIsLoading(true);
-      if (page === 1) {
-        setGallery([]);
-      }
+  function handleSearch(searchingText) {
+    setGallery([]);
+    setSearchingText(searchingText);
+  }
 
-      const resp = await fetchImages(searchingText, page);
-      if (resp.results.length === 0) {
-        throw new Error("Nothing found!");
-      }
-      setGallery(resp.results);
-      if (resp.total > gallery.length) {
-        setIsLoadMore(true);
-      } else {
-        setIsLoadMore(false);
-      }
-      console.log(resp);
-    } catch (error) {
-      setError(error);
-      setIsLoadMore(false);
-      console.log(error);
-      toast.error(`Oooops! ${error.message}!`);
-    } finally {
-      setIsLoading(false);
-    }
+  function handleLoad() {
+    setPage(page + 1);
   }
 
   return (
@@ -83,7 +95,7 @@ function App() {
         />
       )}
       {isloading && <Loader />}
-      {isLoadMore && <LoadMoreBtn />}
+      {isLoadMore && !isloading && <LoadMoreBtn onLoad={handleLoad} />}
     </>
   );
 }
