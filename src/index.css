@@ -118,3 +118,6 @@ address {
   margin-right: auto;
   text-align: center;
 }
+html {
+  scroll-behavior: smooth;
+}

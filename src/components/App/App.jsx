@@ -10,9 +10,9 @@ import "./App.css";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 
 function App() {
-  const appId = 577372;
-  const accessKey = "MgGVu-2Aj7GbcWHyEAULVPxtWi0-9yK_brGw5GgXLKI";
-  const securityKey = "0Bi-McYmSz35ROYe7Vcwkh3cNuZnzS2E91IQZu5IUms";
+  // const appId = 577372;
+  // const accessKey = "MgGVu-2Aj7GbcWHyEAULVPxtWi0-9yK_brGw5GgXLKI";
+  // const securityKey = "0Bi-McYmSz35ROYe7Vcwkh3cNuZnzS2E91IQZu5IUms";
 
   const [gallery, setGallery] = useState([]);
   const [isloading, setIsLoading] = useState(false);
