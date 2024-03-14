@@ -73,12 +73,12 @@
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-.icon:hover {
+.arrow:hover {
   transform: scale(1.1);
   opacity: 1;
 }
 
-.arrow:hover {
+.arrow:hover > .icon {
   transform: scale(1.1);
   opacity: 1;
 }
