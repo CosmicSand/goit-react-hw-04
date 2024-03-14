@@ -12,6 +12,7 @@ function ImageModal({
       isOpen={isOpen}
       shouldCloseOnEsc={true}
       shouldCloseOnOverlayClick={true}
+      shouldReturnFocusAfterClose={false}
       onRequestClose={() => onBackDrop(null)}
       style={{
         overlay: {
