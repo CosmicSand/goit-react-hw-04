@@ -7,7 +7,7 @@ function SearchBar({ onSearch }) {
   function handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
-    const searchingText = form.elements.search.value;
+    const searchingText = form.elements.search.value.toLowerCase();
     if (searchingText.trim().length === 0) {
       return;
     }
