@@ -2,7 +2,7 @@ import ImageCard from "../ImageCard/ImageCard";
 import { BiSolidChevronsUp } from "react-icons/bi";
 import css from "./ImageGallery.module.css";
 
-function ImageGallery({ value, onView }) {
+function ImageGallery({ value, isScroll, onView }) {
   function handleClick(e) {
     console.log(e);
     if (e.target.nodeName !== "IMG") return;
@@ -31,7 +31,7 @@ function ImageGallery({ value, onView }) {
           </li>
         ))}
       </ul>
-      {window.scrollY > 20 && (
+      {isScroll && (
         <div className={css.top}>
           <a className={css.arrow} href="#top">
             <BiSolidChevronsUp className={css.icon} size="32" />

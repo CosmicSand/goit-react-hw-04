@@ -21,6 +21,15 @@ function App() {
   const [isLoadMore, setIsLoadMore] = useState(false);
   const [page, setPage] = useState(1);
   const [searchingText, setSearchingText] = useState("");
+  const [isScroll, setIsScroll] = useState(false);
+
+  window.onscroll = function scrollSetting() {
+    if (window.scrollY > 20) {
+      setIsScroll(true);
+    } else {
+      setIsScroll(false);
+    }
+  };
 
   useEffect(() => {
     async function galleryBuilding(searchingText, page) {
@@ -85,7 +94,11 @@ function App() {
       {error ? (
         <ErrorMessage value={error} />
       ) : (
-        <ImageGallery value={gallery} onView={backDropSetting} />
+        <ImageGallery
+          value={gallery}
+          isScroll={isScroll}
+          onView={backDropSetting}
+        />
       )}
       {modalImage && (
         <ImageModal
