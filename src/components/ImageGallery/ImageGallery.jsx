@@ -4,7 +4,6 @@ import css from "./ImageGallery.module.css";
 
 function ImageGallery({ value, isScroll, onView }) {
   function handleClick(e) {
-    console.log(e);
     if (e.target.nodeName !== "IMG") return;
     const imageTargeted = e.target;
     const imageData = imageTargeted.dataset;
@@ -16,15 +15,11 @@ function ImageGallery({ value, isScroll, onView }) {
       portfolio: imageData.portfolio,
     };
     onView(modalImage);
-    console.log(e.target.nodeName);
-
-    console.log(modalImage);
   }
 
   return (
     <>
-      {" "}
-      <ul className={css.list} onClick={handleClick} onKeyDown={handleClick}>
+      <ul className={css.list} onClick={handleClick}>
         {value.map((imgage) => (
           <li className={css.item} key={imgage.id} tabIndex={0}>
             <ImageCard value={imgage} />
