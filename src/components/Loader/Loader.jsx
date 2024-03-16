@@ -1,17 +1,17 @@
 import { Grid } from "react-loader-spinner";
-import css from "./Loader.module.css";
 
 function Loader() {
   return (
     <Grid
       visible={true}
-      height="80"
-      width="80"
-      color="#fff"
+      height="40"
+      width="40"
+      color="#f4ea84"
       ariaLabel="grid-loading"
       radius="12.5"
       wrapperStyle={{
         display: "block",
+        marginTop: "20px",
         marginLeft: "auto",
         marginRight: "auto",
         textAlign: "center",

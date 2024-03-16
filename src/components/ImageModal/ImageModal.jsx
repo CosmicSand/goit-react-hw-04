@@ -2,7 +2,7 @@ import Modal from "react-modal";
 import css from "./ImageModal.module.css";
 
 function ImageModal({
-  value: { url, alt, name, location, portfolio },
+  chosenImage: { url, alt, name, location, portfolio },
   onBackDrop,
   isOpen,
 }) {

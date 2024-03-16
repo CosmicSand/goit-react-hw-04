@@ -92,17 +92,17 @@ function App() {
         }}
       />
       {error ? (
-        <ErrorMessage value={error} />
+        <ErrorMessage errorObj={error} />
       ) : (
         <ImageGallery
-          value={gallery}
+          galleryArray={gallery}
           isScroll={isScroll}
           onView={backDropSetting}
         />
       )}
       {modalImage && (
         <ImageModal
-          value={modalImage}
+          chosenImage={modalImage}
           isOpen={modalImage && true}
           onBackDrop={backDropSetting}
         />
