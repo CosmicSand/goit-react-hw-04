@@ -29,7 +29,8 @@ function SearchBar({ onSearch }) {
           id={inpId}
           autoComplete="off"
           autoFocus
-          placeholder="Let's search and dive in joy!"
+          placeholder="Let's search and dive in pleasure!"
+          aria-label="Searhing imput"
         />
         <button className={css.btn} type="submit">
           Go!
