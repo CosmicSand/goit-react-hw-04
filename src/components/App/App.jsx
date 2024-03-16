@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import SearchBar from "../SearchBar/SearchBar";
 import Loader from "../Loader/Loader";
@@ -22,6 +22,8 @@ function App() {
   const [page, setPage] = useState(1);
   const [searchingText, setSearchingText] = useState("");
   const [isScroll, setIsScroll] = useState(false);
+
+  const galleryRef = useRef();
 
   window.onscroll = function scrollSetting() {
     if (window.scrollY > 20) {
@@ -63,6 +65,22 @@ function App() {
     galleryBuilding(searchingText, page);
   }, [searchingText, page]);
 
+  //  ================= Скрол вниз на три картки при оновленні галереї ===
+
+  useEffect(() => {
+    if (galleryRef.current.children.length > 0) {
+      const galleryElementHeight =
+        galleryRef.current.lastChild.getBoundingClientRect().height * 3 + 45;
+
+      window.scrollBy({
+        top: galleryElementHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [gallery]);
+
+  // ============= Фуннкції оновлення станів ===================
+
   function backDropSetting(modalImageObj) {
     setModalImage(modalImageObj);
   }
@@ -95,6 +113,7 @@ function App() {
         <ErrorMessage errorObj={error} />
       ) : (
         <ImageGallery
+          ref={galleryRef}
           galleryArray={gallery}
           isScroll={isScroll}
           onView={backDropSetting}
