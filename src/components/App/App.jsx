@@ -87,7 +87,9 @@ function App() {
 
   function handleSearch(searchingText) {
     setGallery([]);
+    setIsLoadMore(false);
     setSearchingText(searchingText);
+    setPage(1);
   }
 
   function handleLoad() {
