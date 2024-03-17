@@ -77,7 +77,7 @@ function App() {
         behavior: "smooth",
       });
     }
-  }, [gallery]);
+  }, [gallery, page]);
 
   // ============= Фуннкції оновлення станів ===================
 
