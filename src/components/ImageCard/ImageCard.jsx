@@ -1,13 +1,28 @@
 import css from "./ImageCard.module.css";
 
 function ImageCard({
-  value: {
+  image: {
     alt_description,
     likes,
     user,
     urls: { small, regular },
   },
+  onView,
 }) {
+  function handleClick(e) {
+    // if (e.target.nodeName !== "IMG") return;
+    const imageTargeted = e.target;
+    const imageData = imageTargeted.dataset;
+    const modalImage = {
+      url: imageData.url,
+      alt: imageTargeted.getAttribute("alt"),
+      name: imageData.author,
+      location: imageData.location,
+      portfolio: imageData.portfolio,
+    };
+    onView(modalImage);
+  }
+
   return (
     <div className={css.card}>
       <img
@@ -21,6 +36,7 @@ function ImageCard({
         data-portfolio={user.links.html}
         width={300}
         height={200}
+        onClick={handleClick}
       />
     </div>
   );
