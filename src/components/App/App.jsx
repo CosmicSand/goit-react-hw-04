@@ -68,7 +68,7 @@ function App() {
   //  ================= Скрол вниз на три картки при оновленні галереї ===
 
   useEffect(() => {
-    if (galleryRef.current.children.length > 0) {
+    if (galleryRef.current.children.length > 0 && page > 1) {
       const galleryElementHeight =
         galleryRef.current.lastChild.getBoundingClientRect().height * 3 + 45;
 
