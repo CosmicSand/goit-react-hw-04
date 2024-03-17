@@ -8,7 +8,7 @@ const ImageGallery = forwardRef(function ImageGallery(
   galleryRef
 ) {
   return (
-    <>
+    <main>
       <ul className={css.list} ref={galleryRef}>
         {galleryArray.map((imgage) => (
           <li className={css.item} key={imgage.id} tabIndex={0}>
@@ -23,7 +23,7 @@ const ImageGallery = forwardRef(function ImageGallery(
           </a>
         </div>
       )}
-    </>
+    </main>
   );
 });
 
