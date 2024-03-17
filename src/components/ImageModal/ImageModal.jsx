@@ -35,6 +35,7 @@ function ImageModal({
           opacity: 1,
           backgroundColor: "black",
           color: "white",
+          inset: 0,
         },
       }}
       contentElement={
