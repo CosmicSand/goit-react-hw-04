@@ -7,7 +7,7 @@
   left: 0;
   /* opacity: 0.9; */
   z-index: 1;
-  background-color: rgb(45 45 45 / 20%);
+  background-color: rgb(45 45 45 / 15%);
   backdrop-filter: blur(3px);
 }
 .form {
